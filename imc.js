@@ -6,6 +6,7 @@ truncateDecimals = function (number, digits) {
     return truncatedNum / multiplier;
 };
 
+
 const btnIniciar = document.getElementById('nutriBoton');
 const labelResultado = document.getElementById('IMC');
 const clasificacion = document.getElementById('resultadoTabla');  
@@ -28,6 +29,7 @@ if (imc < 18.5) {
 
     clasificacion.innerHTML = ("te encuentras bajo de peso.");
     imgEmoji.src = "./feliz.png";
+    
     
 } else if (imc == 18.5 || imc <= 24.9) {
 
