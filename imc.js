@@ -6,7 +6,8 @@ truncateDecimals = function (number, digits) {
     return truncatedNum / multiplier;
 };
 
-
+const btnRadioH = document.getElementById ('h');
+const btnRadioM = document.getElementById ('m');
 const btnIniciar = document.getElementById('nutriBoton');
 const labelResultado = document.getElementById('IMC');
 const clasificacion = document.getElementById('resultadoTabla');  
@@ -16,7 +17,26 @@ const pesoInput = document.getElementById('peso');
 const imgEmoji = document.getElementById("emoji"); 
 
 btnIniciar.onclick = () => {
+
     calcularIMC();
+    pesoIdeal();
+
+}
+
+async function pesoIdeal(){
+
+    if (btnRadioH.checked) {
+        
+        alert("ESTOY CHEQUEADOOOOOOOO * cumbia perrona * eres un " + btnRadioH.value);
+
+    }else if(btnRadioM.checked){
+
+        alert("ESTOY CHEQUEADOOOOOOOO * cumbia perrona * eres una " + btnRadioM.value);
+
+    }else{
+        alert("vos sos un tanque sovietico o que? no podes continuar")
+    }
+
 }
 
 async function calcularIMC(){
