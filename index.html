@@ -15,7 +15,7 @@
         crossorigin="anonymous"></script>
     <!--  -->
     <link href="style.css" rel="stylesheet" type="text/css">
-    
+
 </head>
 
 <body>
@@ -26,15 +26,16 @@
 
             <h1 class="my-3 bg-success">IMC.com</h1>
 
-            <p class="px-3 justify-content-center">Con esta página sabrás en que situación te encuentras con tu IMC con respecto a
+            <p class="px-3 justify-content-center">Con esta página sabrás en que situación te encuentras con tu IMC con
+                respecto a
                 la tabla de la OMS, que tipo de complexion tienes y cual sería tu peso ideal.
             </p>
 
             <h2>¿Qué es el IMC?</h2> <br>
 
             <p class="px-2">
-                El índice de masa corporal (IMC) es aquello que sirve para medir la relación entre el peso y la talla, 
-                lo que  permite identificar el sobrepeso y la obesidad en adultos.
+                El índice de masa corporal (IMC) es aquello que sirve para medir la relación entre el peso y la talla,
+                lo que permite identificar el sobrepeso y la obesidad en adultos.
             </p>
 
             <img src="./tablaIMC.png" class="" height="200">
@@ -42,155 +43,162 @@
 
         </div>
 
-        
-       
+
+
 
         <div class=" justify-content-center">
 
-           
 
-            <div class="mb-3 mt-3" >
+
+            <div class="mb-3 mt-3">
 
                 <p>
                     Ingresa los siguientes datos por favor:
                 </p>
 
-                
+
 
             </div>
 
             <div class="d-flex justify-content-center mb-3">
 
-              
-    
+
+
                 <div>
-                    <input value="hombre" id ="h" name="genero" type="radio">    
+                    <input value="hombre" id="h" name="genero" type="radio">
                     <label for="h">Hombre</label>
-                    
-        
+
+
                 </div>
-        
+
                 <div class=" ms-3">
-                    
+
                     <input id="m" value="mujer" name="genero" type="radio">
                     <label for="m">Mujer</label>
-                    
-        
+
+
                 </div>
-    
+
             </div>
 
             <div>
                 <label>Estatura (m)</label><br>
                 <input class="mb-3" id="estatura" type="number">
             </div>
-            
+
 
 
             <div>
 
-                <label >peso (kg)</label><br>
+                <label>peso (kg)</label><br>
                 <input class="mb-3" id="peso" type="number">
 
             </div>
 
             <div>
 
-                <label>Diametro de muñeca (cm)</label>
+                <label class="mb-1">Diametro de muñeca (cm)</label>
                 <input id="diametro" type="number">
 
             </div>
 
 
-            
 
-            
-                <img id="nutriBoton" src="./BOTNGO.png" class="btn mt-4" height="100">
 
-                <div>
-     
-                    <p class="px-3 justificar">
-                        Tambien con nuestra ayuda podras saber 
-                        que tipo de complexion tienes
-                    </p>
-        
-                    <h2>¿Qué es la complexión?</h2> <br>
-        
-                    <p class="px-2">
-                       Es aquello que te indica que tienes una constitución delgada (pequeña), una constitución normal (mediana) o una constitución grande (robusta).
-                    </p>
-        
-                    <img src="./muñecaComplexion.PNG" class="" height="200">
-        
-        
-                </div>
-        
-           
+
+            <img id="nutriBoton" src="./BOTNGO.png" class="btn mt-4" height="100">
+
+            <div>
+
+                <p class="px-3 justificar">
+                    Tambien con nuestra ayuda podras saber
+                    que tipo de complexion tienes
+                </p>
+
+                <h2>¿Qué es la complexión?</h2> <br>
+
+                <p class="px-2">
+                    Es aquello que te indica que tienes una constitución delgada (pequeña), una constitución normal
+                    (mediana) o una constitución grande (robusta).
+                </p>
+
+                <img src="./muñecaComplexion.PNG" class="" height="200">
+
+
+            </div>
+
+
         </div>
 
         <div>
 
-            <div>
+            <div id="resultados">
 
-                <label>Tu IMC es </label> 
+                <label>Tu IMC es </label>
                 <label id="IMC" class="fw-bold"> </label>
-    
+
 
             </div>
 
             <div>
 
-                <label> tu complexion es </label> 
+                <label> tu complexion es </label>
                 <label id="complexion" class="fw-bold"> </label>
-    
+
 
             </div>
 
             <div>
 
-                <label>según la tabla de la OMS </label> 
+                <label>según la tabla de la OMS </label>
                 <label id="resultadoTabla" class="fw-bold"> </label>
-    
+
 
             </div>
 
             <div>
 
-                <label>según la fórmula del peso ideal de Lorentz tu peso ideal es </label> 
+                <label>según la fórmula del peso ideal de Lorentz tu peso ideal es </label>
                 <label id="resultadoLorentz" class="fw-bold"> </label>
-    
+
 
             </div>
 
             <div>
 
-                <label>y según la fórmula del peso ideal de Monnerot Dumaine tu peso ideal es </label> 
-                <label id="resultadoDumaine" class="fw-bold"> </label>
-    
+                <label>y según la fórmula del peso ideal de Monnerot Dumaine tu peso ideal es </label>
+                <label id="resultadoDamaine" class="fw-bold"> </label>
+
 
             </div>
 
             <div>
 
-                <label>y en promedio tomando en cuenta estos dos tu peso ideal seria  </label> 
+                <label>y en promedio tomando en cuenta estos dos tu peso ideal seria </label>
                 <label id="pesoIdeal" class="fw-bold"> </label>
+
+
+            </div>
+
+            <div>
+
+                <label>para alcanzar tu peso ideal debes </label> 
+                <label id="diferenciaPeso" class="fw-bold"> </label>
     
 
-            </div> 
+            </div>
 
 
 
-           
-           
         </div>
-        
+
         <div>
 
             <img src="./R-removebg-preview.png" height="100">
 
             <img id="emoji" src="./neutro.png">
 
-            
+
 
         </div>
 
@@ -200,7 +208,7 @@
 
             <img id="complexionIMG" src="./mediano.png">
 
-            
+
 
         </div>
 

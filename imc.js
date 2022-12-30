@@ -11,10 +11,11 @@ var idealLorentz = 0;
 var idealDumaine = 0;
 var pesoIdeal;
 
+const diferenciaPeso =document.getElementById('diferenciaPeso');
 const labelLorentz = document.getElementById('resultadoLorentz');
 const labelDamaine = document.getElementById('resultadoDamaine');
 const labelPesoIdeal = document.getElementById('pesoIdeal');
-const diametroImput = document.getElementById('diametro');
+const diametroInput = document.getElementById('diametro');
 const complexionLabel = document.getElementById('complexion');
 const btnRadioH = document.getElementById('h');
 const btnRadioM = document.getElementById('m');
@@ -27,19 +28,22 @@ const pesoInput = document.getElementById('peso');
 const imgEmoji = document.getElementById("emoji");
 const imgSilueta = document.getElementById("complexionIMG");
 
-checarDatos = function () {
-
+function checarDatos() {
+var bandera = false;
     if (btnRadioH.checked || btnRadioM.checked) {
-        if (estaturaInput.value > 0 && pesoInput.value > 0 && diametroImput.value > 0) {
-            return true;
+        if (estaturaInput.value > 0 && pesoInput.value > 0 && diametroInput.value > 0) {
+            bandera = true;
         }
     }
-    return true;
+    return bandera
+    
 
 }
 
 btnIniciar.onclick = () => {
-    if (checarDatos == true) {
+   
+    if (checarDatos() == true) {
+        document.getElementById("resultados").scrollIntoView();
         calcularIMC();
         calcularComplexion();
         calcularPesoIdeal();
@@ -54,7 +58,7 @@ btnIniciar.onclick = () => {
 
 async function calcularComplexion() {
 
-    complexion = (estaturaInput.value * 100) / diametroImput.value;
+    complexion = (estaturaInput.value * 100) / diametroInput.value;
 
 
 
@@ -148,17 +152,27 @@ async function calcularIMC() {
 async function calcularPesoIdeal(){
 
     if(btnRadioH.checked){
-        idealLorentz = (estaturaInput.value * 100) - 100 - ((estaturaInput.value * 100) - (150 / 4));
-        idealDumaine = (estaturaInput.value * 100) - 100 + (4*(diametroImput.value / 2));
+        idealLorentz = ((estaturaInput.value * 100) - 100) - (((estaturaInput.value * 100) - 150) / 4);
+        idealDumaine = (((estaturaInput.value * 100) - 100) + (4 * diametroInput.value)) / 2;
     }else{
-        idealLorentz = (estaturaInput.value * 100) - 100 - ((estaturaInput.value * 100) - (150 / 2.5));
-        idealDumaine = (estaturaInput.value * 100) - 100 + (4*((estaturaInput.value * 100) / 2));
+        idealLorentz = (estaturaInput.value * 100) - 100 - (((estaturaInput.value * 100) - 150) / 2.5);
+        idealDumaine = (((estaturaInput.value * 100) - 100) + (4 * diametroInput.value)) / 2;
     }
     
     pesoIdeal = (idealDumaine + idealLorentz)/2;
-    labelLorentz.innerHTML = idealLorentz;
-    labelDamaine.innerHTML = idealDumaine;
-    labelPesoIdeal.innerHTML = pesoIdeal
+    labelLorentz.innerHTML = idealLorentz + "kg";
+    labelDamaine.innerHTML = idealDumaine + "kg";
+    labelPesoIdeal.innerHTML = pesoIdeal + "kg"
+    var diferencia = pesoIdeal - pesoInput.value; 
+    if (diferencia < 0) {
+        diferencia = diferencia * -1;
+        diferenciaPeso.innerHTML = "perder " + diferencia + "kg"; 
+
+    } else {
+        diferenciaPeso.innerHTML = "ganar " + diferencia + "kg"; 
+
+    }
+
 }
 
 
