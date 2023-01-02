@@ -1,3 +1,7 @@
 .justificar{
     text-align:justify ;
 }
+
+#emoji{
+   visibility: hidden;
+}

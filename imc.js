@@ -10,7 +10,9 @@ var complexion;
 var idealLorentz = 0;
 var idealDumaine = 0;
 var pesoIdeal;
+var idealCreff;
 
+const edadImput = document.getElementById('Edad');
 const diferenciaPeso =document.getElementById('diferenciaPeso');
 const labelLorentz = document.getElementById('resultadoLorentz');
 const labelDamaine = document.getElementById('resultadoDamaine');
@@ -24,14 +26,19 @@ const labelResultado = document.getElementById('IMC');
 const clasificacion = document.getElementById('resultadoTabla');
 const estaturaInput = document.getElementById('estatura');
 const pesoInput = document.getElementById('peso');
+const creffLabel = document.getElementById('resultadoCreff');
 
 const imgEmoji = document.getElementById("emoji");
 const imgSilueta = document.getElementById("complexionIMG");
 
+
+
 function checarDatos() {
 var bandera = false;
     if (btnRadioH.checked || btnRadioM.checked) {
-        if (estaturaInput.value > 0 && pesoInput.value > 0 && diametroInput.value > 0) {
+        if (estaturaInput.value > 0 && pesoInput.value > 0 &&
+             diametroInput.value > 0 && edadImput.value > 0) {
+
             bandera = true;
         }
     }
@@ -41,12 +48,15 @@ var bandera = false;
 }
 
 btnIniciar.onclick = () => {
+
+    imgEmoji.style.visibility="visible";
    
     if (checarDatos() == true) {
         document.getElementById("resultados").scrollIntoView();
         calcularIMC();
-        calcularComplexion();
-        calcularPesoIdeal();
+        var test = calcularComplexion();
+        calcularPesoIdeal(test);
+        
     }else {
         alert("Llena todos los datos bolas no podes continuar");
         location.reload ();
@@ -56,8 +66,10 @@ btnIniciar.onclick = () => {
 
 }
 
-async function calcularComplexion() {
 
+
+function calcularComplexion() {
+    var resultado = "pequeña";
     complexion = (estaturaInput.value * 100) / diametroInput.value;
 
 
@@ -73,12 +85,14 @@ async function calcularComplexion() {
 
             complexionLabel.innerHTML = "mediana";
             imgSilueta.src = "./mediano.png";
+            resultado= "mediana";
 
 
         } else if (complexion < 9.9) {
 
             complexionLabel.innerHTML = "grande";
             imgSilueta.src = "./gorda.png";
+            resultado = "grande";
 
 
         }
@@ -94,15 +108,19 @@ async function calcularComplexion() {
 
             complexionLabel.innerHTML = "mediana";
             imgSilueta.src = "./mediano.png";
+            resultado = "mediana";
 
         } else if (complexion < 9.6) {
 
             complexionLabel.innerHTML = "grande";
             imgSilueta.src = "./gorda.png";
+            resultado = "grande";
 
         }
-    } 
 
+        
+    } 
+    return resultado;
 }
 
 async function calcularIMC() {
@@ -149,7 +167,7 @@ async function calcularIMC() {
 
 }
 
-async function calcularPesoIdeal(){
+async function calcularPesoIdeal(complexion){
 
     if(btnRadioH.checked){
         idealLorentz = ((estaturaInput.value * 100) - 100) - (((estaturaInput.value * 100) - 150) / 4);
@@ -158,18 +176,57 @@ async function calcularPesoIdeal(){
         idealLorentz = (estaturaInput.value * 100) - 100 - (((estaturaInput.value * 100) - 150) / 2.5);
         idealDumaine = (((estaturaInput.value * 100) - 100) + (4 * diametroInput.value)) / 2;
     }
-    
-    pesoIdeal = (idealDumaine + idealLorentz)/2;
-    labelLorentz.innerHTML = idealLorentz + "kg";
-    labelDamaine.innerHTML = idealDumaine + "kg";
-    labelPesoIdeal.innerHTML = pesoIdeal + "kg"
-    var diferencia = pesoIdeal - pesoInput.value; 
-    if (diferencia < 0) {
-        diferencia = diferencia * -1;
-        diferenciaPeso.innerHTML = "perder " + diferencia + "kg"; 
 
+    if (complexion == "pequeña") {
+      
+       idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * 0.81;
+       creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
     } else {
-        diferenciaPeso.innerHTML = "ganar " + diferencia + "kg"; 
+
+        if (complexion == "mediana") {
+
+            idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * 0.9;
+            creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
+         } else {
+
+            if (complexion == "grande") {
+
+                idealCreff = (((estaturaInput.value * 100) -100) + (edadImput.value ) / 10) * (0.9 * 1.1);
+                creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
+             } 
+             
+         }
+        
+        
+    }
+    
+    pesoIdeal = (idealDumaine + idealLorentz + idealCreff)/3;
+    labelLorentz.innerHTML = truncateDecimals(idealLorentz,2) + "kg";
+    labelDamaine.innerHTML = truncateDecimals(idealDumaine,2) + "kg";
+    labelPesoIdeal.innerHTML = truncateDecimals(pesoIdeal,2) + "kg"
+    var diferencia = pesoIdeal - pesoInput.value; 
+    
+
+    if(diferencia < 1 && diferencia>-1){
+        if(diferencia < 1 && diferencia>0){
+            diferenciaPeso.innerHTML = "ganar " + truncateDecimals(diferencia,2)  + "kg";
+        }else{
+            diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia,2) * -1) + "kg";
+        }
+        
+        imgSilueta.src = "./chad.png";
+    }else{
+
+        if (diferencia <= -1 || diferencia >= 1) {
+           if(diferencia <= -1){
+            diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia,2)*-1) + "kg";  
+           }else {
+            diferenciaPeso.innerHTML = "ganar " + (truncateDecimals(diferencia,2)*1) + "kg"; 
+    
+        }
+            
+    
+        } 
 
     }
 
