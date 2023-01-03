@@ -11,9 +11,10 @@ var idealLorentz = 0;
 var idealDumaine = 0;
 var pesoIdeal;
 var idealCreff;
+var genero;
 
 const edadImput = document.getElementById('Edad');
-const diferenciaPeso =document.getElementById('diferenciaPeso');
+const diferenciaPeso = document.getElementById('diferenciaPeso');
 const labelLorentz = document.getElementById('resultadoLorentz');
 const labelDamaine = document.getElementById('resultadoDamaine');
 const labelPesoIdeal = document.getElementById('pesoIdeal');
@@ -34,32 +35,45 @@ const imgSilueta = document.getElementById("complexionIMG");
 
 
 function checarDatos() {
-var bandera = false;
+    var bandera = false;
     if (btnRadioH.checked || btnRadioM.checked) {
         if (estaturaInput.value > 0 && pesoInput.value > 0 &&
-             diametroInput.value > 0 && edadImput.value > 0) {
+            diametroInput.value > 0 && edadImput.value > 0) {
 
             bandera = true;
         }
     }
     return bandera
-    
+
 
 }
 
+const cargarSonido = function (fuente) {
+    const sonido = document.createElement("audio");
+    sonido.src = fuente;
+    sonido.setAttribute("preload", "auto");
+    sonido.setAttribute("controls", "none");
+    sonido.style.display = "none"; // <-- oculto
+    document.body.appendChild(sonido);
+    return sonido;
+};
+
+const sonido = cargarSonido("can_you_feel.mp3");
+
 btnIniciar.onclick = () => {
 
-    imgEmoji.style.visibility="visible";
-   
+    imgEmoji.style.visibility = "visible";
+
     if (checarDatos() == true) {
+        
         document.getElementById("resultados").scrollIntoView();
         calcularIMC();
         var test = calcularComplexion();
         calcularPesoIdeal(test);
-        
-    }else {
+
+    } else {
         alert("Llena todos los datos bolas no podes continuar");
-        location.reload ();
+        location.reload();
     }
 
 
@@ -75,7 +89,7 @@ function calcularComplexion() {
 
 
     if (btnRadioH.checked) {
-
+        genero = "hombre";
         if (complexion > 10.9) {
 
             complexionLabel.innerHTML = "pequeña";
@@ -85,7 +99,7 @@ function calcularComplexion() {
 
             complexionLabel.innerHTML = "mediana";
             imgSilueta.src = "./mediano.png";
-            resultado= "mediana";
+            resultado = "mediana";
 
 
         } else if (complexion < 9.9) {
@@ -98,7 +112,7 @@ function calcularComplexion() {
         }
 
     } else if (btnRadioM.checked) {
-
+        genero = "mujer";
         if (complexion > 10.4) {
 
             complexionLabel.innerHTML = "pequeña";
@@ -118,8 +132,8 @@ function calcularComplexion() {
 
         }
 
-        
-    } 
+
+    }
     return resultado;
 }
 
@@ -167,66 +181,83 @@ async function calcularIMC() {
 
 }
 
-async function calcularPesoIdeal(complexion){
+async function calcularPesoIdeal(complexion) {
 
-    if(btnRadioH.checked){
+    if (btnRadioH.checked) {
         idealLorentz = ((estaturaInput.value * 100) - 100) - (((estaturaInput.value * 100) - 150) / 4);
         idealDumaine = (((estaturaInput.value * 100) - 100) + (4 * diametroInput.value)) / 2;
-    }else{
+    } else {
         idealLorentz = (estaturaInput.value * 100) - 100 - (((estaturaInput.value * 100) - 150) / 2.5);
         idealDumaine = (((estaturaInput.value * 100) - 100) + (4 * diametroInput.value)) / 2;
     }
 
     if (complexion == "pequeña") {
-      
-       idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * 0.81;
-       creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
+
+        idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * 0.81;
+        creffLabel.innerHTML = truncateDecimals(idealCreff, 2);
     } else {
 
         if (complexion == "mediana") {
 
             idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * 0.9;
-            creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
-         } else {
+            creffLabel.innerHTML = truncateDecimals(idealCreff, 2);
+        } else {
 
             if (complexion == "grande") {
 
-                idealCreff = (((estaturaInput.value * 100) -100) + (edadImput.value ) / 10) * (0.9 * 1.1);
-                creffLabel.innerHTML =  truncateDecimals(idealCreff,2);
-             } 
-             
-         }
-        
-        
-    }
-    
-    pesoIdeal = (idealDumaine + idealLorentz + idealCreff)/3;
-    labelLorentz.innerHTML = truncateDecimals(idealLorentz,2) + "kg";
-    labelDamaine.innerHTML = truncateDecimals(idealDumaine,2) + "kg";
-    labelPesoIdeal.innerHTML = truncateDecimals(pesoIdeal,2) + "kg"
-    var diferencia = pesoIdeal - pesoInput.value; 
-    
+                idealCreff = (((estaturaInput.value * 100) - 100) + (edadImput.value) / 10) * (0.9 * 1.1);
+                creffLabel.innerHTML = truncateDecimals(idealCreff, 2);
+            }
 
-    if(diferencia < 1 && diferencia>-1){
-        if(diferencia < 1 && diferencia>0){
-            diferenciaPeso.innerHTML = "ganar " + truncateDecimals(diferencia,2)  + "kg";
-        }else{
-            diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia,2) * -1) + "kg";
         }
-        
-        imgSilueta.src = "./chad.png";
-    }else{
+
+
+    }
+
+    pesoIdeal = (idealDumaine + idealLorentz + idealCreff) / 3;
+    labelLorentz.innerHTML = truncateDecimals(idealLorentz, 2) + "kg";
+    labelDamaine.innerHTML = truncateDecimals(idealDumaine, 2) + "kg";
+    labelPesoIdeal.innerHTML = truncateDecimals(pesoIdeal, 2) + "kg"
+    var diferencia = pesoIdeal - pesoInput.value;
+
+
+    if (diferencia < 1 && diferencia > -1) {
+
+        if (genero == "hombre") {
+
+            if (diferencia < 1 && diferencia > 0) {
+                diferenciaPeso.innerHTML = "ganar " + truncateDecimals(diferencia, 2) + "kg";
+            } else {
+                diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
+            }
+
+            imgSilueta.src = "./chad.png";
+            sonido.play("can_you_feel.mp3");
+
+        } else {
+            if (diferencia < 1 && diferencia > 0) {
+                diferenciaPeso.innerHTML = "ganar " + truncateDecimals(diferencia, 2) + "kg";
+            } else {
+                diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
+            }
+
+            imgSilueta.src = "./chad_woman.png";
+            sonido.play("can_you_feel.mp3");
+        }
+
+
+    } else {
 
         if (diferencia <= -1 || diferencia >= 1) {
-           if(diferencia <= -1){
-            diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia,2)*-1) + "kg";  
-           }else {
-            diferenciaPeso.innerHTML = "ganar " + (truncateDecimals(diferencia,2)*1) + "kg"; 
-    
+            if (diferencia <= -1) {
+                diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
+            } else {
+                diferenciaPeso.innerHTML = "ganar " + (truncateDecimals(diferencia, 2) * 1) + "kg";
+
+            }
+
+
         }
-            
-    
-        } 
 
     }
 
