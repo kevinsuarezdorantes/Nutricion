@@ -13,8 +13,10 @@ var pesoIdeal;
 var idealCreff;
 var genero;
 
-const btn1 =document.getElementById('btn1');
-const btn2 =document.getElementById('btn2');
+const btntabla =document.getElementById('btntabla');
+const btntablaComplexion =document.getElementById('btntablacomplexion');
+const btnemoji =document.getElementById('btnemoji');
+const btncomplexion =document.getElementById('btncomplexion');
 const edadImput = document.getElementById('Edad');
 const diferenciaPeso = document.getElementById('diferenciaPeso');
 const labelLorentz = document.getElementById('resultadoLorentz');
@@ -62,12 +64,20 @@ const cargarSonido = function (fuente) {
 
 const sonido = cargarSonido("can_you_feel.mp3");
 
-btn1.onclick = () =>{
+btntabla.onclick = () =>{
     document.getElementById("IMC").scrollIntoView();
 }
 
-btn2.onclick = () =>{
-    document.getElementById("complexion").scrollIntoView();
+btntablaComplexion.onclick = () =>{
+    document.getElementById("complexionSeccion").scrollIntoView();
+}
+
+btnemoji.onclick = () =>{
+    document.getElementById("title2").scrollIntoView();
+}
+
+btncomplexion.onclick = () =>{
+    document.getElementById("title3").scrollIntoView();
 }
 
 btnIniciar.onclick = () => {
