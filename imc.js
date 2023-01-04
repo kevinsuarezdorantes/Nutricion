@@ -73,7 +73,7 @@ btn2.onclick = () =>{
 btnIniciar.onclick = () => {
 
     imgEmoji.style.visibility = "visible";
-    imgSilueta.style.visibility = "bisible";
+    imgSilueta.style.visibility = "visible";
 
     if (checarDatos() == true) {
         
