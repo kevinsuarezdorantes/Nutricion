@@ -13,6 +13,8 @@ var pesoIdeal;
 var idealCreff;
 var genero;
 
+const btn1 =document.getElementById('btn1');
+const btn2 =document.getElementById('btn2');
 const edadImput = document.getElementById('Edad');
 const diferenciaPeso = document.getElementById('diferenciaPeso');
 const labelLorentz = document.getElementById('resultadoLorentz');
@@ -60,13 +62,22 @@ const cargarSonido = function (fuente) {
 
 const sonido = cargarSonido("can_you_feel.mp3");
 
+btn1.onclick = () =>{
+    document.getElementById("IMC").scrollIntoView();
+}
+
+btn2.onclick = () =>{
+    document.getElementById("complexion").scrollIntoView();
+}
+
 btnIniciar.onclick = () => {
 
     imgEmoji.style.visibility = "visible";
+    imgSilueta.style.visibility = "bisible";
 
     if (checarDatos() == true) {
         
-        document.getElementById("resultados").scrollIntoView();
+        document.getElementById("title1").scrollIntoView();
         calcularIMC();
         var test = calcularComplexion();
         calcularPesoIdeal(test);
