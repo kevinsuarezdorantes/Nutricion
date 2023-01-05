@@ -9,3 +9,7 @@
 #complexionIMG{
     visibility: hidden;
  }
+
+ #btnInvisible{
+    display: none;
+ }

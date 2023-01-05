@@ -6,7 +6,7 @@ truncateDecimals = function (number, digits) {
     return truncatedNum / multiplier;
 };
 
-alert('Esta página es meramente informativa y su fin es ayudarte a mejorar tu estdo de salud proporcionándote información útil, para más seguridad ve con tu médico de confianza.La versión de escritorio está en proceso de mejora');
+alert('Esta página es meramente informativa y su fin es ayudarte a mejorar tu estdo de salud proporcionándote información útil, para más seguridad ve con tu médico de confianza.La versión de escritorio está en proceso de mejora.');
 
 var complexion;
 var idealLorentz = 0;
@@ -15,6 +15,8 @@ var pesoIdeal;
 var idealCreff;
 var genero;
 
+const chadModal = document.getElementById('chadModal')
+const btnInvisible = document.getElementById('btnInvisible');
 const btntabla =document.getElementById('btntabla');
 const btntablaComplexion =document.getElementById('btntablacomplexion');
 const btnemoji =document.getElementById('btnemoji');
@@ -83,7 +85,7 @@ btncomplexion.onclick = () =>{
 }
 
 btnIniciar.onclick = () => {
-
+    document.getElementById('btnInvisible').click();
     imgEmoji.style.visibility = "visible";
     imgSilueta.style.visibility = "visible";
 
@@ -254,6 +256,7 @@ async function calcularPesoIdeal(complexion) {
                 diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
             }
 
+            btnInvisible.click();
             imgSilueta.src ="./chad.PNG";
             sonido.play("can_you_feel.mp3");
 
@@ -264,8 +267,11 @@ async function calcularPesoIdeal(complexion) {
                 diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
             }
 
+            
             imgSilueta.src="./chad_woman.PNG";
             sonido.play("can_you_feel.mp3");
+            chadModal.src = "./chad_woman.PNG";
+            btnInvisible.click();
         }
 
 
