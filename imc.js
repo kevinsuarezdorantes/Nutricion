@@ -6,6 +6,8 @@ truncateDecimals = function (number, digits) {
     return truncatedNum / multiplier;
 };
 
+alert('Esta página es meramente informativa y su fin es ayudarte a mejorar tu estdo de salud proporcionandote informacoin util, para mas seguridad ve con tu médico de confianza.La versoin de escritorio esta en proceso de mejora');
+
 var complexion;
 var idealLorentz = 0;
 var idealDumaine = 0;
@@ -252,7 +254,7 @@ async function calcularPesoIdeal(complexion) {
                 diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
             }
 
-            imgSilueta.src = "./chad.png";
+            imgSilueta.src ="./chad.PNG";
             sonido.play("can_you_feel.mp3");
 
         } else {
@@ -262,7 +264,7 @@ async function calcularPesoIdeal(complexion) {
                 diferenciaPeso.innerHTML = "perder " + (truncateDecimals(diferencia, 2) * -1) + "kg";
             }
 
-            imgSilueta.src = "./chad_woman.png";
+            imgSilueta.src="./chad_woman.PNG";
             sonido.play("can_you_feel.mp3");
         }
 
