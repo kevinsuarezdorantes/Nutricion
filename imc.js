@@ -6,7 +6,7 @@ truncateDecimals = function (number, digits) {
     return truncatedNum / multiplier;
 };
 
-alert('Esta página es meramente informativa y su fin es ayudarte a mejorar tu estdo de salud proporcionandote informacoin util, para mas seguridad ve con tu médico de confianza.La versoin de escritorio esta en proceso de mejora');
+alert('Esta página es meramente informativa y su fin es ayudarte a mejorar tu estdo de salud proporcionándote información útil, para más seguridad ve con tu médico de confianza.La versión de escritorio está en proceso de mejora');
 
 var complexion;
 var idealLorentz = 0;
